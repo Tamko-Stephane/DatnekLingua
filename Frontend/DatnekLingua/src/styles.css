@@ -1,1 +1,22 @@
 /* You can add global styles to this file, and also import other style files */
+.language_element{
+  font-size:  large !important;
+}
+.modal_zone{
+  height: 64px;
+}
+.custom-class {
+  /* position: relative;
+  top: 10%;
+  transform: translateY(-20%); */
+  margin-top: 50px;
+}
+.search-results {
+  height: 600px;
+  overflow-y: scroll;
+}
+
+/* .languages_container{
+  max-height: 640px;
+  min-height: 500px;
+} */
