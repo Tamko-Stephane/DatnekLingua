@@ -27,6 +27,7 @@ export class AppComponent implements OnInit {
   languages:ConfiguredLanguage[]=[];
   closeResult: string="";
   page_size:number=10;
+  nomLangueSelectionne:string="";
   availableLanguageCodeTranslations=[
     {"code":"fr", "name":"French"},
     {"code":"en-US", "name":"English"},
@@ -154,6 +155,9 @@ private getConfiguredLanguages(page_size:number=2, page:number=0):ConfiguredLang
               value.isAppLanguage,
               value.isCompulsoryLanguage
           ));
+            //set app language name indicator
+            if(value.isAppLanguage)
+            this.nomLangueSelectionne=value.language_name;
         });
         this.languages.sort(function(l,m){
         return (l.isCompulsoryLanguage && m.isCompulsoryLanguage) ? 0 : m.isCompulsoryLanguage ? 1 : -1;

@@ -75,8 +75,13 @@
           </ng-template>
     </div>
     <!--paneau droit pour le choix de la langue de l'application-->
-    <div class="col-lg-3 col-12 container mt-3">
-      <div class="border rounded shadow-sm row selection-group">
+    <div class="col-lg-3 col-12 container mt-2">
+      <div class="text-center p-2 bg-danger h5 border rounded shadow-sm row">
+        <div class="col-12 bold">{{nomLangueSelectionne}}</div>
+        <div class="col-12 my-2" style="border:0.2px solid #ffffff;"></div>
+        <div class="col-12 bold">{{languages.length}}</div>
+      </div>
+      <div class="border rounded shadow-sm row selection-group mt-1">
         <!--information utilisateur-->
         <div class="col-12 app-user-info mt-3">
           <p class="row">
