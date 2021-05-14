@@ -5,6 +5,7 @@ import {  Routes } from '@angular/router';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { InfiniteScrollModule } from 'ngx-infinite-scroll';
 import { AppComponent } from './app.component';
+import { HttpClientModule } from '@angular/common/http';
 
 const ROUTES:Routes = [
   { path:'', redirectTo:'appComponent', pathMatch:'full'}
@@ -18,7 +19,8 @@ const ROUTES:Routes = [
     BrowserModule,
     NgbModule,
     InfiniteScrollModule,
-    FormsModule
+    FormsModule,
+    HttpClientModule
   ],
   providers: [],
   bootstrap: [AppComponent]

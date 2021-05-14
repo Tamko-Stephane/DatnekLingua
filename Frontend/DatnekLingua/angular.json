@@ -5,11 +5,7 @@
   "projects": {
     "DatnekLingua": {
       "projectType": "application",
-      "schematics": {
-        "@schematics/angular:application": {
-          "strict": true
-        }
-      },
+      "schematics": {},
       "root": "",
       "sourceRoot": "src",
       "prefix": "app",
@@ -25,16 +21,23 @@
             "aot": true,
             "assets": [
               "src/favicon.ico",
-              "src/assets"
+              "src/assets",
+              "src/web.config"
             ],
             "styles": [
               "./node_modules/bootstrap/dist/css/bootstrap.min.css",
-              "./node_modules/material-design-icons/iconfont/material-icons.css",
+              "./node_modules/material-icons/iconfont/material-icons.css",
               "src/styles.css"
             ],
             "scripts": []
           },
           "configurations": {
+            "fr": {
+              "localize": ["fr"]
+            },
+            "nl": {
+              "localize": ["nl"]
+            },
             "production": {
               "fileReplacements": [
                 {
@@ -45,6 +48,7 @@
               "optimization": true,
               "outputHashing": "all",
               "sourceMap": false,
+              "extractCss": true,
               "namedChunks": false,
               "extractLicenses": true,
               "vendorChunk": false,
@@ -52,13 +56,13 @@
               "budgets": [
                 {
                   "type": "initial",
-                  "maximumWarning": "500kb",
-                  "maximumError": "1mb"
+                  "maximumWarning": "2mb",
+                  "maximumError": "5mb"
                 },
                 {
                   "type": "anyComponentStyle",
-                  "maximumWarning": "2kb",
-                  "maximumError": "4kb"
+                  "maximumWarning": "6kb",
+                  "maximumError": "10kb"
                 }
               ]
             }
@@ -70,6 +74,12 @@
             "browserTarget": "DatnekLingua:build"
           },
           "configurations": {
+            "fr": {
+              "browserTarget": "DatnekLingua:build:fr"
+            },
+            "nl": {
+              "browserTarget": "DatnekLingua:build:nl"
+            },
             "production": {
               "browserTarget": "DatnekLingua:build:production"
             }
@@ -94,9 +104,8 @@
             ],
             "styles": [
               "./node_modules/bootstrap/dist/css/bootstrap.min.css",
-              "./node_modules/material-design-icons/iconfont/material-icons.css",
+              "./node_modules/material-icons/iconfont/material-icons.css",
               "src/styles.css"
-
             ],
             "scripts": []
           }
@@ -126,8 +135,13 @@
             }
           }
         }
+      },
+      "i18n": {
+        "locales": {
+          "fr": "src/locale/messages.fr.xlf",
+          "nl": "src/locale/messages.nl.xlf"
+        }
       }
-    }
-  },
+    }},
   "defaultProject": "DatnekLingua"
 }
