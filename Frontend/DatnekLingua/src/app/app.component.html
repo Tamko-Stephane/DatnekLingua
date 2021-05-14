@@ -1,10 +1,10 @@
 <div class="container">
   <div class="row mt-4">
     <!--paneau gauche pour la liste détailé des langue de l'utilisateur-->
-    <div class="col-lg-9 col-sm-9 col-9">
+    <div class="col-lg-9 col-12">
           <div class="col-12 col-lg-12 col-sm-12">
-            <div class="modal_zone" >
-              <p class="row">
+            <div class="" >
+              <div class="row">
                 <span class="col text-center">
                   <span class="material-icons md-36">record_voice_over</span><br/><span class="text-danger" i18n="speak_level_icon_meaning|signification icon niveau parlé@@signe_niveau_parle">Speak level</span>
                 </span>
@@ -14,13 +14,14 @@
                 <span class="col text-center">
                   <span class="material-icons md-36">people</span><br/><span class="text-danger" i18n="understand_level_icon_meaning|signification icon niveau comprehension@@signe_niveau_comprehension">Understanding level</span>
                 </span>
-                <span class="badge rounded-circle py-4 px-3" [class]="isModalActive? 'badge-success':'badge-dark'">Modal</span> <!--indicateur du modal ouvert ou fermé-->
-              </p>
+                <div class="col"><span class="badge rounded-circle py-4 px-3" [class]="isModalActive? 'badge-success':'badge-dark'">Modal</span> <!--indicateur du modal ouvert ou fermé--></div>
+              </div>
             </div>
           </div>
           <!--liste scrollable pour les langues de l'utilisateur-->
-          <div
-            class="search-results mt-4"
+
+            <div
+            class="search-results mt-4 container row"
             infiniteScroll
             [infiniteScrollDistance]="scrollDistance"
             [infiniteScrollThrottle]="throttle"
@@ -30,17 +31,17 @@
               <div class="col-12 col-lg-12 col-sm-12 mt-3 d-flex justify-content-center" *ngFor="let languageObj of languages">
                 <div class="btn btn-block badge-pill badge-light language_element" (dblclick)='openDetail(mymodal, languageObj)'>
                   <div class="row m-1">
-                    <div class="col-3 text-left inline">
+                    <div class="col-lg-3 col-12 inline">
                       <span class="material-icons">
                       language
                       </span>
                       <span class="align-top ml-2">{{languageObj.language_name}}</span></div>
-                    <div class="col-7 px-0">
-                      <span class="col-4 inline"><span class="material-icons md-32" data-toggle="tooltip" data-placement="top" title="niveau parlé">record_voice_over</span><span class="align-top ml-1">: {{languageObj.level_speak_name}}</span></span>
-                      <span class="col-4 inline"><span class="material-icons md-32" data-toggle="tooltip" data-placement="top" title="niveau écrit">explicit</span><span class="align-top ml-1">: {{languageObj.level_write_name}}</span></span>
-                      <span class="col-4 inline"><span class="material-icons md-32" data-toggle="tooltip" data-placement="top" title="niveau compréhension">people</span><span class="align-top ml-1">: {{languageObj.level_understand_name}}</span></span>
+                    <div class="col-lg-7 col-12">
+                      <span class="col-lg-4 col-12"><span class="material-icons md-32" data-toggle="tooltip" data-placement="top" title="niveau parlé">record_voice_over</span><span class="align-top ml-1">: {{languageObj.level_speak_name}}</span></span>
+                      <span class="col-lg-4 col-12"><span class="material-icons md-32" data-toggle="tooltip" data-placement="top" title="niveau écrit">explicit</span><span class="align-top ml-1">: {{languageObj.level_write_name}}</span></span>
+                      <span class="col-lg-4 col-12"><span class="material-icons md-32" data-toggle="tooltip" data-placement="top" title="niveau compréhension">people</span><span class="align-top ml-1">: {{languageObj.level_understand_name}}</span></span>
                     </div>
-                    <div class="col-2">
+                    <div class="col-lg-2 col-12">
                       <a class="text-primary" data-toggle="tooltip" data-placement="top" title="modifier les données de la langue" (click)='openDetail(mymodal, languageObj)' ><span class="material-icons">edit</span></a>
                       <a *ngIf="!languageObj.isCompulsoryLanguage" class="text-danger ml-4" data-toggle="tooltip" data-placement="top" title="supprimer la langue" (click)="deleteLanguage(languageObj)" ><span class="material-icons">delete</span></a>
                     </div>
@@ -48,6 +49,8 @@
                 </div>
               </div>
           </div>
+
+
           <ng-template #mymodal let-modal>
           <div class="modal-header">
             <div class="modal-title h5 d-flex">
@@ -72,7 +75,7 @@
           </ng-template>
     </div>
     <!--paneau droit pour le choix de la langue de l'application-->
-    <div class="col-lg-3 col-sm-3 col-3 container">
+    <div class="col-lg-3 col-12 container mt-3">
       <div class="border rounded shadow-sm row selection-group">
         <!--information utilisateur-->
         <div class="col-12 app-user-info mt-3">
@@ -97,7 +100,7 @@
         <div class="col-12 my-3" style="border:0.4px solid #A21B26;"></div>
         <!--bouton ajout langue-->
         <div class="col-12 text-center app-language-add mb-3">
-          <a class="offset-1 col-10 btn btn-sm btn-outline-danger border-0 d-flex inline" (click)="openCreate(myAddLangModal)">
+          <a class="offset-1 col-10 btn btn-sm btn-outline-danger border-0 d-flex inline justify-content-center" (click)="openCreate(myAddLangModal)">
             <span class="material-icons md-36">add_circle_outline</span>
             <span class="ml-1 text-left mt-2 h6" i18n="add language text|texte ajouter une langue@@add_language_text">Add a language</span>
           </a>

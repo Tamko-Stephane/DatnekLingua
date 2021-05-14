@@ -38,14 +38,11 @@ languageChangeObservable: any;
     this.newLanguage=new NewLanguageVM('','','','');
   }
   ngOnInit():void {
-
   try {
 
     //get app language code from server
-    var user_language_code="";
    this.getAppLanguageCode().subscribe(
      resp=>{
-      console.log(resp);
       //get launched app language code
         var current_language_code = window.location.pathname.split("/")[1];
 
@@ -53,13 +50,11 @@ languageChangeObservable: any;
         var availableCode = this.availableLanguageCodeTranslations.find(
           l=>l.code===resp
         );
-        console.log(availableCode);
         if(resp!=="" && resp!==current_language_code)
         {
           //redirect
           window.location.href = `/${availableCode.code}`;
         }
-
      });
 
 
@@ -102,7 +97,6 @@ languageChangeObservable: any;
       appThis.http.get<AppLanguageGet>('http://localhost:50499/api/userlanguages/getAppLanguageCode').subscribe(
         resp=>
         {
-          console.log(resp.code);
           observer.next(resp.code);
         });
         });
@@ -116,14 +110,10 @@ languageChangeObservable: any;
       var availableCode = this.availableLanguageCodeTranslations.find(
         l=>l.name.toLocaleLowerCase()=== languageSelected.language_name.toLocaleLowerCase()
       );
-          console.log(languageSelected.language_name);
-          console.log(languageSelected.guid);
-          console.log(availableCode);
         if(availableCode){
           //set language change by api
           this.http.get<SetAppLanguageResult>('http://localhost:50499/api/userlanguages/setAppLanguage',{params:{"user_language_guid":`${languageSelected.guid}`}}).subscribe(
             resp =>{
-                console.log(resp);
                 if(resp.status.toString() === "200"){
                   window.location.href = `/${availableCode.code}`;
                 }
@@ -136,10 +126,13 @@ languageChangeObservable: any;
   async onScroll(){
   //add new languages to list
   let page = 0;
-  if(this.languages && this.total_configured_languages>this.languages.length)
+  if(this.languages!==null && this.total_configured_languages>this.languages.length)
+  {
     page=this.languages.length % this.page_size;
-  page++;
-  await this.getConfiguredLanguages(this.page_size, page);
+    page++;
+    await this.getConfiguredLanguages(this.page_size, page);
+  }
+
 }
 
 
@@ -148,24 +141,21 @@ private getConfiguredLanguages(page_size:number=2, page:number=0):ConfiguredLang
   this.http.get<UserLanguage_Get>('http://localhost:50499/api/userlanguages/paginate',{params:{'page_size':`${page_size}`,'page':`${page}`}})
     .subscribe(
       resp=>{
-
           this.total_configured_languages = resp.total_count;
-
-          resp.data.forEach(element => {
+          resp.data.forEach(value => {
+            //check if not yet contained
+            if(!this.languages.find(ul=>ul.guid===value.guid))
           this.languages.push(new ConfiguredLanguage(
-              element.guid,
-              element.language_name,
-              element.level_speak_name,
-              element.level_write_name,
-              element.level_understand_name,
-              element.isAppLanguage,
-              element.isCompulsoryLanguage
+              value.guid,
+              value.language_name,
+              value.level_speak_name,
+              value.level_write_name,
+              value.level_understand_name,
+              value.isAppLanguage,
+              value.isCompulsoryLanguage
           ));
-            //set
         });
         this.languages.sort(function(l,m){
-          // console.log(l.language_name +" iscompulsory -> "+l.isCompulsoryLanguage);
-          // console.log(m.language_name +" iscompulsory -> "+m.isCompulsoryLanguage);
         return (l.isCompulsoryLanguage && m.isCompulsoryLanguage) ? 0 : m.isCompulsoryLanguage ? 1 : -1;
       });
       }
@@ -181,7 +171,6 @@ deleteLanguage(languageToDelete:ConfiguredLanguage){    //deletes language from 
     //supprimer de la liste des langues courantes, la langue
     this.http.delete('http://localhost:50499/api/userlanguages/'+languageToDelete.guid).subscribe(resp=>
     {
-      console.log(resp);
       //recupérer l'index de l'élément
       var index = this.languages.indexOf(languageToDelete, 0);
       if(index > -1){
@@ -221,7 +210,6 @@ openCreate(content:any){    //open the create modal after updating/reseting obje
         this.languagesNames.splice(0,number_languages);
     }
     this.http.get<Language[]>('http://localhost:50499/api/languages/configurable').subscribe(resp=>{
-    console.log(resp);
       resp.forEach(lang => {
         this.languagesNames.push(lang)
       });
@@ -231,8 +219,6 @@ openCreate(content:any){    //open the create modal after updating/reseting obje
     this.modalService.open(content, {ariaLabelledBy:'modal-basic-title', windowClass:'custom-class'}).result.then((result)=>{
       this.closeResult = `Closed with: ${result}`;
       console.log(this.closeResult);
-      console.log(result);
-
     }, (reason)=>{
       this.closeResult = `Dismissed ${this.getDismissReason(reason)}`;
       console.log(this.closeResult);
@@ -242,11 +228,9 @@ openCreate(content:any){    //open the create modal after updating/reseting obje
 
 
 saveNewLanguage(languageToSave:NewLanguageVM){    //save new language to array
-  console.log(languageToSave);
   //send a new language creation to server, server returns a language view item to add to current languages
   this.http.post<ConfiguredLanguage>('http://localhost:50499/api/userlanguages', languageToSave).subscribe(
     resp => {
-      console.log(resp);
       this.languages.push(new ConfiguredLanguage(
               resp.guid,
               resp.language_name,
