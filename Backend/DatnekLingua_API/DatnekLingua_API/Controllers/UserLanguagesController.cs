@@ -78,7 +78,7 @@ namespace DatnekLingua_API.Controllers
                     );
                 return Ok(new
                 {
-                    total_count = user_config_languages.Count(),
+                    total_count = context.UserConfiguredLanguages.Count(),
                     page,
                     data = user_config_languages
                 });
