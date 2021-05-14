@@ -6,13 +6,13 @@
             <div class="modal_zone" >
               <p class="row">
                 <span class="col text-center">
-                  <span class="material-icons md-36">record_voice_over</span><br/><span class="text-danger">Niveau parlé</span>
+                  <span class="material-icons md-36">record_voice_over</span><br/><span class="text-danger" i18n="speak_level_icon_meaning|signification icon niveau parlé@@signe_niveau_parle">Speak level</span>
                 </span>
                 <span class="col text-center">
-                  <span class="material-icons md-36">explicit</span><br/><span class="text-danger">Niveau écrit</span>
+                  <span class="material-icons md-36">explicit</span><br/><span class="text-danger" i18n="write_level_icon_meaning|signification icon niveau écrit@@signe_niveau_ecrit">Write level</span>
                 </span>
                 <span class="col text-center">
-                  <span class="material-icons md-36">people</span><br/><span class="text-danger">niveau compréhension</span>
+                  <span class="material-icons md-36">people</span><br/><span class="text-danger" i18n="understand_level_icon_meaning|signification icon niveau comprehension@@signe_niveau_comprehension">Understanding level</span>
                 </span>
                 <span class="badge rounded-circle py-4 px-3" [class]="isModalActive? 'badge-success':'badge-dark'">Modal</span> <!--indicateur du modal ouvert ou fermé-->
               </p>
@@ -30,13 +30,15 @@
               <div class="col-12 col-lg-12 col-sm-12 mt-3 d-flex justify-content-center" *ngFor="let languageObj of languages">
                 <div class="btn btn-block badge-pill badge-light language_element" (dblclick)='openDetail(mymodal, languageObj)'>
                   <div class="row m-1">
-                    <div class="col-3 text-left inline"><span class="material-icons">
+                    <div class="col-3 text-left inline">
+                      <span class="material-icons">
                       language
-                      </span><span class="align-top ml-2">{{languageObj.nom}}</span></div>
+                      </span>
+                      <span class="align-top ml-2">{{languageObj.language_name}}</span></div>
                     <div class="col-7 px-0">
-                      <span class="col-4 inline"><span class="material-icons md-32" data-toggle="tooltip" data-placement="top" title="niveau parlé">record_voice_over</span><span class="align-top ml-1">: {{languageObj.niveauParle}}</span></span>
-                      <span class="col-4 inline"><span class="material-icons md-32" data-toggle="tooltip" data-placement="top" title="niveau écrit">explicit</span><span class="align-top ml-1">: {{languageObj.niveauEcrit}}</span></span>
-                      <span class="col-4 inline"><span class="material-icons md-32" data-toggle="tooltip" data-placement="top" title="niveau compréhension">people</span><span class="align-top ml-1">: {{languageObj.niveauCompris}}</span></span>
+                      <span class="col-4 inline"><span class="material-icons md-32" data-toggle="tooltip" data-placement="top" title="niveau parlé">record_voice_over</span><span class="align-top ml-1">: {{languageObj.level_speak_name}}</span></span>
+                      <span class="col-4 inline"><span class="material-icons md-32" data-toggle="tooltip" data-placement="top" title="niveau écrit">explicit</span><span class="align-top ml-1">: {{languageObj.level_write_name}}</span></span>
+                      <span class="col-4 inline"><span class="material-icons md-32" data-toggle="tooltip" data-placement="top" title="niveau compréhension">people</span><span class="align-top ml-1">: {{languageObj.level_understand_name}}</span></span>
                     </div>
                     <div class="col-2">
                       <a class="text-primary" data-toggle="tooltip" data-placement="top" title="modifier les données de la langue" (click)='openDetail(mymodal, languageObj)' ><span class="material-icons">edit</span></a>
@@ -50,9 +52,9 @@
           <div class="modal-header">
             <div class="modal-title h5 d-flex">
               <div class="inline">
-                <span class="" id="modal-basic-title align-top">Détail de la langue</span> <span class="ml-3 align-baseline text-success material-icons">
+                <span class="" id="modal-basic-title align-top" i18n="detail_language|détail de la langue@@detail_language">Language details</span> <span class="ml-3 align-baseline text-success material-icons">
                   language
-                  </span> <span class="bold text-success align-top ml-1">{{languageToDetail.nom}}</span>
+                  </span> <span class="bold text-success align-top ml-1">{{languageToDetail.language_name}}</span>
               </div>
             </div>
             <button type="button" class="close" (click)="modal.dismiss('Cross click')" aria-label="Close">
@@ -60,12 +62,12 @@
             </button>
           </div>
           <div class="modal-body">
-            <p>niveau parle : {{languageToDetail.niveauParle}}.</p>
-            <p>niveau écrit : {{languageToDetail.niveauEcrit}}.</p>
-            <p>niveau comprehension : {{languageToDetail.niveauCompris}}.</p>
+            <p><span i18n="detail speak level|détail sur le niveau parlé@@detail_speak_level">speak level</span> : {{languageToDetail.level_speak_name}}.</p>
+            <p><span i18n="detail write level|détail sur le niveau écrit@@detail_write_level">write level</span> : {{languageToDetail.level_write_name}}.</p>
+            <p><span i18n="detail undertand level|détail sur le niveau compréhension@@detail_understand_level">understanding level</span> : {{languageToDetail.level_understand_name}}.</p>
           </div>
           <div class="modal-footer">
-            <button type="button" class="btn btn-secondary" (click)="modal.close('Save click')">Ok</button>
+            <button type="button" class="btn btn-secondary" (click)="modal.close('Save click')"  i18n="button ok|bouton ok@@ok_button">Ok</button>
           </div>
           </ng-template>
     </div>
@@ -84,12 +86,12 @@
 
         </div>
         <div class="col-12 my-3" style="border:0.4px solid #A21B26;"></div>
-        <div class="col-12 inline text-center"><span class="material-icons">language</span><span class="ml-1 align-top">Langue de l'application</span></div>
+        <div class="col-12 inline text-center"><span class="material-icons">language</span><span class="ml-1 align-top" i18n="app language text|texte langue de l'application@@app_language_text">application language</span></div>
         <!--selection langue d'application-->
         <div class="col-12 px-0 text-center app-language-selection">
           <!--group checkbox buttons-->
           <div class="btn-group-vertical col-12 px-0">
-              <button type="button" class="btn btn-sm btn-secondary p-2"   *ngFor="let lang of languages" [class]=" lang.isAppCurrentLanguage ? 'active' : '' " #buttonItem (click)="languageSelection(buttonItem)" >{{lang.nom}}</button>
+              <button type="button" class="btn btn-sm btn-secondary p-2"   *ngFor="let lang of languages" [class]=" lang.isAppLanguage ? 'active' : '' " #buttonItem (click)="changeAppLanguage(lang)" >{{lang.language_name}}</button>
           </div>
         </div>
         <div class="col-12 my-3" style="border:0.4px solid #A21B26;"></div>
@@ -97,7 +99,7 @@
         <div class="col-12 text-center app-language-add mb-3">
           <a class="offset-1 col-10 btn btn-sm btn-outline-danger border-0 d-flex inline" (click)="openCreate(myAddLangModal)">
             <span class="material-icons md-36">add_circle_outline</span>
-            <span class="ml-1 text-left mt-2 h6">Ajouter une Langue</span>
+            <span class="ml-1 text-left mt-2 h6" i18n="add language text|texte ajouter une langue@@add_language_text">Add a language</span>
           </a>
         </div>
       </div>
@@ -106,7 +108,7 @@
         <div class="modal-header">
           <div class="modal-title h5 d-flex">
             <div class="inline">
-              <span class="" id="modal-basic-title align-top">Ajout d'une nouvelle langue</span>
+              <span class="" id="modal-basic-title align-top" i18n="configure a language text|texte configuré une nouvelle langue@@configure_language_text">Configure a new language</span>
             </div>
           </div>
           <button type="button" class="close" (click)="modal.dismiss('Cross click')" aria-label="Close">
@@ -114,37 +116,37 @@
           </button>
         </div>
         <div class="modal-body">
-          <form class="form">
+          <form class="form" #form=ngForm>
             <div class="form-group" >
-              <label for="nom">Nom de la langue:</label>
-              <select type="text" class="form-control" [(ngModel)]="newLanguage.selected_name_id" name="selected_name_id">
+              <label for="nom" i18n="language name text|nom de la langue texte@@language_name_text">Language name:</label>
+              <select type="text" class="form-control" required  [(ngModel)]="newLanguage.language_guid" name="language_guid">
                 <option *ngFor="let lang of languagesNames" value="{{lang.guid}}">{{lang.name}}</option>
               </select>
             </div>
             <div class="form-group" >
-              <label for="niveauParle">Niveau parlé:</label>
-              <select type="text" class="form-control" [(ngModel)]="newLanguage.selected_talk_id" name="selected_talk_id">
-                <option *ngFor="let level of levelIndicators" value="{{level.guid}}">{{level.name}}</option>
+              <label for="niveauParle"><span i18n="level speak text|texte niveau parlé@@speak_level-text_1">Speak level</span>:</label>
+              <select type="text" class="form-control" required [(ngModel)]="newLanguage.speak_level_guid" name="speak_level_guid">
+                <option *ngFor="let level of levels_parle" value="{{level.guid}}">{{level.name}}</option>
               </select>
             </div>
             <div class="form-group" >
-              <label for="niveauEcrit">Niveau écrit:</label>
-              <select type="text" class="form-control" [(ngModel)]="newLanguage.selected_write_id" name="selected_write_id">
-                <option *ngFor="let level of levelIndicators" value="{{level.guid}}">{{level.name}}</option>
+              <label for="niveauEcrit"><span i18n="level write text|texte niveau écrit@@write_level_text_1">Write level</span>:</label>
+              <select type="text" class="form-control" required [(ngModel)]="newLanguage.write_level_guid" name="write_level_guid">
+                <option *ngFor="let level of levels_ecrit" value="{{level.guid}}">{{level.name}}</option>
               </select>
             </div>
             <div class="form-group" >
-              <label for="niveauCompris">Niveau compréhension:</label>
-              <select type="text" class="form-control" [(ngModel)]="newLanguage.selected_understand_id" name="selected_understand_id">
-                <option *ngFor="let level of levelIndicators" value="{{level.guid}}">{{level.name}}</option>
+              <label for="niveauCompris"><span i18n="level understand text|texte niveau comprehension@@understand_level_text_1">Understanding level</span>:</label>
+              <select type="text" class="form-control" required [(ngModel)]="newLanguage.understand_level_guid" name="understand_level_guid">
+                <option *ngFor="let level of levels_comprehension" value="{{level.guid}}">{{level.name}}</option>
               </select>
             </div>
           </form>
         </div>
         <div class="modal-footer">
-          <button type="button" class="btn btn-danger" (click)="saveNewLanguage(newLanguage)">Sauvegarder</button>
+          <button type="button" class="btn btn-danger" [disabled]="!form.valid" (click)="saveNewLanguage(newLanguage)" i18n="button save text|texte sauvegarder@@save_btn_text">Save</button>
         </div>
         </ng-template>
     </div>
   </div>
-</div>
+</div><!--AUTHOR TAMKO STEPHANE, @contact: https://twitter.com/FlywingsS -->
